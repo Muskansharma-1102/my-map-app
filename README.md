@@ -1,38 +1,135 @@
-# Satellite Imagery Map App
+AOI Creation Map Application
 
-## Setup
-1. Clone: `git clone <your-repo-url>`
-2. Install: `npm install`
-3. Run: `npm run dev`
-4. Test: `npm run test`
+A single-page interactive web mapping application built for the Frontend Engineer Internship Assignment — Flowbit Private Limited.
 
-## Map Library Choice
-Chose react-leaflet for its React integration, WMS support, and lightweight nature. Alternatives like OpenLayers are more powerful but heavier for this task.
+This project converts the provided Figma UI into a functional React + Leaflet-based mapping tool with WMS layers, drawing tools, geocoding, marker clustering, and persistence.
 
-## Architecture Decisions
-Modular components (Header, Sidebar, Map) with custom hooks for state. Separated concerns: UI in components, logic in hooks/utils.
+🚀 Tech Stack
+Feature	Technology
+Framework	React + TypeScript
+Build Tool	Vite
+Styling	Tailwind CSS
+Map Library	Leaflet + react-leaflet
+Testing	Playwright
+State Management	Local + React Hooks
+API Source	WMS NRW DOF Layer
+🧭 Features
 
-## Performance Considerations
-Used marker clustering for 1000s of points. Debounced map events. For polygons, virtualize rendering with Leaflet's layer groups.
+✔️ Render and toggle the official WMS satellite imagery
+✔️ Geocoding search (Nominatim)
+✔️ Drawing support (points, polygons)
+✔️ Persistent features saved to localStorage
+✔️ Marker Clustering for improved performance
+✔️ Responsive UI matching Figma
 
-## Testing Strategy
-Playwright for E2E: Map loading, layer toggling, drawing. Focused on critical paths. With more time, add unit tests for hooks.
+📦 Install & Run
+git clone https://github.com/USERNAME/my-map-app.git
+cd my-map-app
 
-## Tradeoffs
-Prioritized simplicity; skipped advanced animations for faster dev. Used localStorage over a DB for persistence.
+npm install
+npm run dev
 
-## Production Readiness
-Add error boundaries, CI/CD with GitHub Actions, monitoring with Sentry, and HTTPS.
 
-## Time Spent
-- Setup: 4 hours
-- Map Integration: 8 hours
-- UI/Bonuses: 10 hours
-- Tests/Docs: 6 hours
-- Total: 28 hours
+No environment variables required.
 
-## Demo Video
-[Link to video]
+🗺️ Map Library Choice
 
-## ER Diagram/Schema
-Simple: Features stored as JSON in localStorage (id, type, coordinates).
+I selected Leaflet + react-leaflet because:
+
+Criteria	Reason
+Lightweight	Best for 2D GIS layers and WMS
+Easy Plugin Support	Works well with draw tools, geocoder, clustering
+Open Data & Plugin Ecosystem	Ideal for AOI workflows
+Future scalability	Supports vector tiles and custom CRS
+Alternatives Considered
+Library	Why Not Selected
+MapLibre	Best for vector tile workflows, but unnecessary for WMS-only requirement
+OpenLayers	Very powerful but heavier, steeper learning curve
+Mapbox / react-map-gl	Requires API keys & proprietary dependencies
+🧩 Architecture & Project Structure
+📦 src
+ ┣ 📂 components
+ ┃ ┣ Map.tsx         <-- Mapping logic (WMS, Draw tools, Geocoder)
+ ┃ ┗ Sidebar.tsx     <-- UI to toggle layers & manage AOIs
+ ┣ 📂 hooks
+ ┃ ┗ useLocalStorage.ts
+ ┣ 📂 utils
+ ┃ ┣ mapConfig.ts
+ ┃ ┗ storage.ts
+ ┣ 📂 tests
+ ┃ ┗ map.spec.ts     <-- Playwright tests
+ ┗ types.ts
+
+
+Why this structure?
+
+Separation of logic (map plugins, UI, utilities)
+
+Easy scalability for additional map layers or shapes
+
+⚡ Performance Considerations
+Problem	Solution Implemented
+Rendering thousands of points	Marker clustering
+Re-rendering on state update	Memoized rendering + controlled event listeners
+Heavy WMS layer	Cached tile layer internally (Leaflet default cache)
+Future polygon complexity	GeoJSON-based storage + possible simplification
+
+Future enhancement options:
+
+Virtualized layers
+
+Web workers for GeoJSON parsing
+
+Tile-based vector rendering
+
+🧪 Testing Strategy
+What was tested:
+Test Type	Example
+Rendering Test	Map loads and WMS layer visible
+Interaction Test	User can draw AOI and polygon stored
+Persistence	Reload restores stored AOIs
+
+Playwright example:
+
+npx playwright test
+
+What I would test with more time
+
+Accessibility testing (keyboard for drawing tools)
+
+Unit tests for geometry filters
+
+Snapshot testing for UI components
+
+⚖️ Tradeoffs Made
+Tradeoff	Reason
+Used client-side storage instead of DB	Assignment requires no backend
+Clustered markers only for points	Polygons clustering would require turf.js
+Kept UI simple vs fully dynamic layer catalog	Focused on assignment core goals
+🏗️ Production Readiness Plan
+Upgrade	Benefit
+CI/CD with Vercel + GitHub actions	Automated deploy & testing
+ESlint + Prettier strict mode	Code consistency across team
+Offline caching for map tiles	Faster load & resilience
+Role-based sessions	Save AOIs per user
+⏱️ Time Breakdown
+Task	Time
+Map research and library evaluation	1 hr
+Project setup (React + Vite + Tailwind)	30 min
+WMS integration + zoom behaviors	1 hr
+Drawing tools and persistence	2 hrs
+Geocoding and clustering	1 hr
+UI styling to match Figma	2 hrs
+Testing	1 hr
+Documentation	30 min
+📹 Demo Video
+
+🎥 Attached with submission
+
+📁 ER / Feature Schema (Client-side)
+Feature {
+ id: string
+ type: "point" | "polygon"
+ coordinates: GeoJSON
+ timestamp: number
+}
