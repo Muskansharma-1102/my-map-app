@@ -4,7 +4,7 @@ A single-page interactive web mapping application built for the Frontend Enginee
 
 This project converts the provided Figma UI into a functional React + Leaflet-based mapping tool with WMS layers, drawing tools, geocoding, marker clustering, and persistence.
 
-🚀 Tech Stack
+Tech Stack
 Feature	Technology
 Framework	React + TypeScript
 Build Tool	Vite
@@ -13,17 +13,17 @@ Map Library	Leaflet + react-leaflet
 Testing	Playwright
 State Management	Local + React Hooks
 API Source	WMS NRW DOF Layer
-🧭 Features
+Features
 
-✔️ Render and toggle the official WMS satellite imagery
-✔️ Geocoding search (Nominatim)
-✔️ Drawing support (points, polygons)
-✔️ Persistent features saved to localStorage
-✔️ Marker Clustering for improved performance
-✔️ Responsive UI matching Figma
+Render and toggle the official WMS satellite imagery
+ Geocoding search (Nominatim)
+Drawing support (points, polygons)
+ Persistent features saved to localStorage
+ Marker Clustering for improved performance
+ Responsive UI matching Figma
 
-📦 Install & Run
-git clone https://github.com/USERNAME/my-map-app.git
+ Install & Run
+git clone https://github.com/Muskansharma-1102/my-map-app.git
 cd my-map-app
 
 npm install
@@ -31,8 +31,7 @@ npm run dev
 
 
 No environment variables required.
-
-🗺️ Map Library Choice
+ Map Library Choice
 
 I selected Leaflet + react-leaflet because:
 
@@ -82,7 +81,7 @@ Web workers for GeoJSON parsing
 
 Tile-based vector rendering
 
-🧪 Testing Strategy
+ Testing Strategy
 What was tested:
 Test Type	Example
 Rendering Test	Map loads and WMS layer visible
@@ -101,18 +100,18 @@ Unit tests for geometry filters
 
 Snapshot testing for UI components
 
-⚖️ Tradeoffs Made
+Tradeoffs Made
 Tradeoff	Reason
 Used client-side storage instead of DB	Assignment requires no backend
 Clustered markers only for points	Polygons clustering would require turf.js
 Kept UI simple vs fully dynamic layer catalog	Focused on assignment core goals
-🏗️ Production Readiness Plan
+Production Readiness Plan
 Upgrade	Benefit
 CI/CD with Vercel + GitHub actions	Automated deploy & testing
 ESlint + Prettier strict mode	Code consistency across team
 Offline caching for map tiles	Faster load & resilience
 Role-based sessions	Save AOIs per user
-⏱️ Time Breakdown
+Time Breakdown
 Task	Time
 Map research and library evaluation	1 hr
 Project setup (React + Vite + Tailwind)	30 min
@@ -121,10 +120,7 @@ Drawing tools and persistence	2 hrs
 Geocoding and clustering	1 hr
 UI styling to match Figma	2 hrs
 Testing	1 hr
-Documentation	30 min
-📹 Demo Video
-
-🎥 Attached with submission
+Attached with submission
 
 📁 ER / Feature Schema (Client-side)
 Feature {
